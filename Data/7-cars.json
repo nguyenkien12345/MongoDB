@@ -1,0 +1,20 @@
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000028"},"brand":"Mercedes-Benz","model":"300TE","price":37000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000029"},"brand":"Lincoln","model":"Town Car","price":40000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d900002a"},"brand":"MINI","model":"Cooper Countryman","price":27000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d900002b"},"brand":"Ford","model":"Club Wagon","price":23000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d900002c"},"brand":"Ford","model":"Bronco","price":29000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d900002d"},"brand":"Oldsmobile","model":"Achieva","price":46000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d900002e"},"brand":"Ford","model":"Explorer Sport Trac","price":33000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d900002f"},"brand":"Chevrolet","model":"Caprice Classic","price":36000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000030"},"brand":"Mercury","model":"Monterey","price":44000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000031"},"brand":"Ford","model":"F150","price":48000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000032"},"brand":"Toyota","model":"Corolla","price":42000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000033"},"brand":"Pontiac","model":"Grand Prix","price":24000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000034"},"brand":"Lincoln","model":"Navigator","price":24000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000035"},"brand":"Daewoo","model":"Nubira","price":30000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000036"},"brand":"Buick","model":"Riviera","price":47000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000037"},"brand":"Jeep","model":"Grand Cherokee","price":39000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000038"},"brand":"GMC","model":"Yukon","price":26000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d9000039"},"brand":"Hummer","model":"H2","price":35000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d900003a"},"brand":"Maserati","model":"Quattroporte","price":29000}
+{"_id":{"$oid":"5f22f6a9fc13ae61d900003b"},"brand":"Porsche","model":"911","price":31000}

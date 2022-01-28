@@ -1,0 +1,132 @@
+ BASIC COMMANDS 
+ => use <database>: Tạo mới database hoặc sử dụng database chỉ định để làm việc
+
+ => db.<collection> Tạo ra collection
+
+ => db.getCollectionNames(): In ra các collection đang tồn tại trong database
+
+ => db.<collection>.find(): In ra các dữ liệu có trong collection đó
+
+ => db.product.findOne(): Lấy ra documentation đầu tiên
+
+ => db.product.findOne().<key>: Lấy ra giá trị dựa vào key của documentation đầu tiên
+
+ => db.product.findOne()._id.getTimestamp(): Lấy ra thời gian tạo ra obj này dựa vào _id của documentation đầu tiên
+
+ => db.product.findOne()._id.valueOf()/str: Ép kiểu dữ liệu từ obj về string
+
+ => db.users.find().pretty(): Nó sẽ định dạng lại giúp hiển thị dữ liệu dể đọc hơn
+
+ CRUD
+ INSERT
+ => db.<collection>.insert:(object)
+    vd: db.category.insert:({name: "Laptop"})
+	db.product.insert:({name: "Samsung Galaxy S21+ Plus 5G", category: "60bdc741af610bd18ff2f359"})
+   Lưu ý: "60bdc741af610bd18ff2f359" là id của category mà chúng ta muốn product nó thuộc
+
+ UPDATE
+ => db.<collection>.updateOne(WhatToUpdate, HowToUpdate);
+    WhatToUpdate = query object
+    HowToUpdate = {
+    	$set:{
+	  field1: value1,
+	  field2: value2,
+	}
+    }
+    vd: db.product.updateOne({_id: ObjectId("60bdc667af610bd18ff2f356")}, {$set:{stock_quantity: 100}}) (Thêm cột stock_quantity với giá trị là 100 cho documentation)
+	db.getCollection('users').update({_id: ObjectId("60be3b2ac1c30e5d58a415f6")},{$set:{first_name: "Nguyen", last_name: "Kien", age:21}})
+	db.users.updateOne({_id: ObjectId("60be3b2ac1c30e5d58a415f6")}, {$set: {first_name: "Ngo", last_name: "My", "settings.languages": "EN"}})
+	db.users.updateOne({_id: ObjectId("60be3b2ac1c30e5d58a415f6")}, {$set: {first_name: "Ngo", last_name: "My", "settings.languages": "EN", "settings.currency": "USD"}})
+
+ IMPORT FILE CSV, JSON
+ => mongoimport --type csv -d <db> -c <collection> --headerline --drop /path/to/file.csv: import data from csv
+ Giải thích: headerline có lấy dòng đầu tiên (dòng mô tả các cột trong bảng), drop xoá cái collection đang có đi(nếu đã tồn tại) và ghi đè lên lại
+ => mongoimport --type json -d <db> -c <collection> --drop /path/to/file.csv: import data from json
+ Giải thích: json không có headerline 
+
+ QUERY DATA
+ => db.<collection>.find(query)
+ {key: value}
+ {key: {$ne: value}}  ne:  not equals
+ {key: {$gt: value}}  gt:  greater than
+ {key: {$gte: value}} gte: greater than or equals
+ {key: {$lt: value}}  lt:  less than
+ {key: {$lte: value}} lte: less than or equals
+ {key: {$in: value}}  in:  1 trong những
+ {key: {$nin: value}} nin: ngược lại của 1 trong những
+
+ PRACTICE QUERY:
+ - Find all male users					=> db.users.find({gender: 'Male'})									
+ - Find all users with age > 35				=> db.users.find({age: {$gt: 35}})
+ - Find all users with age >= 42			=> db.users.find({age: {$gte: 42}})	
+ - Find all users with age = 33 or 47			=> db.users.find({age: {$in: [33,47]}})
+ - Find all users with email address ends with .edu	=> db.users.find({email: /\.edu$/}) (\. để biết đây là dấu ., $ kí tự kết thúc chuỗi) 
+ - Find all users with IP address starts with 1		=> db.users.find({ip_address: /^1/}) (^ bắt đầu là 1 kí tự gì đó) 
+
+ AND, OR
+ - Find all male user who are older than 35		=> db.users.find({gender: 'Male', age: {$gt: 35}})
+ - Find all user who are male or age < 45		=> db.users.find({$or:[{gender: 'Male'},{age: {$lt: 45}}]}) 
+ 
+ NESTED OBJECT
+ {
+   _id: ObjectId(...),
+   profile:{
+    city: "Hanoi",   				  	=> db.user.find({"profile.city":"Hanoi"})
+    work: "XYZ" 
+  }
+ }
+
+ ARRAY FIELD
+ {
+   _id: ObjectId(...),
+   profile:{
+    city: "Hanoi",   				  	
+    work: "XYZ" 					=> db.user.find({"languages":"English"})
+  },
+ languages: ["English","Japanese","Vietnamese"]		=> db.user.find({languages: {$size:2}})  (Tìm ra những user nói được 2 ngôn ngữ)
+ }
+ Query all pet owners who have pets of type 1					    => db.pets_owners.find({"pets.type":1})
+ Query all pet owners who have at least one pet of type 2 and name starts with C    => db.pets_owners.find({pets:{$elemMatch: {type:2, name: /^C/}}})
+ Lưu ý: Nếu tìm kiếm dữ liệu trong Array of embedded documents mà có từ 2 điều kiện trở lên nên dùng elemMatch
+
+ QUERY EMPTY FIELDS
+ db.customers.find({last_login: null}); 		 => Thường nó sẽ trả về 2 TH: 1 là những object không có trường last_login, 2 là những object có trường last_login: null 
+ db.customers.find({last_login: {$exists: false}});      => Nó sẽ chỉ trả về là những object không có trường last_login ($exists: false => Không tồn tại trường ta chỉ định)
+
+ $WHERE OPERATOR
+ db.collection.find({$where: 'javascript expression'});
+ Find all guest have first name equals to last name  	=> db.guests.find({$where: "this.first_name === this.last_name"})
+
+ COUNT, SKIP, LIMIT
+ db.collection.find(query).skip(x).limit(y)
+ db.collection.count(query)
+ (Pagination và Infinite Scroll)
+ vd:
+ How many male users are there				=> db.getCollection('users').find({gender: 'Male'}).count()
+ Get the first 6 users					=> db.getCollection('users').find({gender: 'Male'}).limit(6)
+ Get next 6 users (skip the first 6 users)		=> db.getCollection('users').find({gender: 'Male'}).skip(6).limit(6)
+							=> GET/users?limit=6
+
+ SORT
+ db.collection.find(query).sort({field: -1/1})
+ Find all apartments that near a school   	 		=> db.getCollection('apartments').find({}).sort({distance_to_school: 1})
+ Find all apartments that near a school and low rental cost   	=> db.getCollection('apartments').find({}).sort({distance_to_school: 1, monthly_rent_cost: 1})
+
+ ATOMIC OPERATORS
+ $inc      : tăng 1 trường lên n đơn vị
+ $push     : thêm 1 cái giá trị vào trong array
+ $pull     : lấy 1 giá trị ra khỏi array
+ $addToSet : Chỉ thêm những phần tử chưa tồn tại trong array
+ vd: db.posts.updateOne({_id: ObjectId("60bef78827871e0a1c763819")}, {$inc: {viewCount: 1}}) 		=> Tăng viewCount thêm 1 đơn vị
+     db.posts.updateOne({_id: ObjectId("60bef78827871e0a1c763819")}, {$inc: {viewCount: 1}}) 		=> Giảm viewCount xuống 1 đơn vị
+     db.posts.updateOne({_id: ObjectId("60bef78827871e0a1c763819")}, {$push: {likes: ['Kien','My']}})	=> Thêm vào mảng likes 1 array
+     db.posts.updateOne({_id: ObjectId("60bef78827871e0a1c763819")}, {$push: {likes: 'Nhi'}})		=> Thêm vào mảng likes 1 giá trị
+     db.posts.updateOne({_id: ObjectId("60bef78827871e0a1c763819")}, {$addToSet: {likes: ['Nhi']}})     => Thêm vào mảng likes 1 array chưa tồn tại
+     db.posts.updateOne({_id: ObjectId("60bef78827871e0a1c763819")}, {$pull: {likes: ['Kien','My']}})   => Lấy ra khỏi mảng likes những array có giá trị là Kien và My
+
+ COLLECTION METHODS
+ db.collection.drop()
+ db.collection.renameCollection("new_name")
+
+ INDEXING
+ db.users.createIndex({email: 1}) => Tạo chỉ số index cho email bắt đầu từ 1 và tăng 1

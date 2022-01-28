@@ -1,0 +1,9 @@
+﻿Bước 1: Đi cài đặt các thư việc express,ejs,mongoose,body-parser
+Bước 2: Gọi các thư viện này vào trong file index.js
+Bước 3: Đi Setup Views trong file index.js (Tạo folder Views)
+Bước 4: Lên www.mongodb.com => Đăng nhập => Vào Cluster => Connect => Connect your application => Copy chuỗi kết nối => Thay đổi username và password tương ứng đồng thời đặt lại tên database theo ý chúng ta => Setup Mongoose trong file index.js
+Bước 5: Tạo folder models => Tạo các file định nghĩa bảng (collection) của chúng ta trong folder models
+Bước 6: Gọi các file collection (bảng) được tạo trong folder models vào file index.js
+Bước 7: Thêm dữ liệu, xử lý, lưu vào mongoose trong file index.js
+Bước 8: Lấy data từ mongoose ra để hiện thị lên giao diện
+Bước 9: Đổ dữ liệu ra giao diện html

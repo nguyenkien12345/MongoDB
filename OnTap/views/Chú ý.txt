@@ -1,0 +1,2 @@
+<%%><%%> => Dùng cho vòng lặp nói chung 
+<%= %>   => Dùng để hiển thị dữ liệu

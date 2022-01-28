@@ -1,0 +1,1 @@
+<%- include('admin/' + page);  %> => Cách gọi 1 file ejs vào 1 file ejs khác dùng include

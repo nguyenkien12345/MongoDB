@@ -1,0 +1,8 @@
+<h1>Edit Category</h1>
+<form action="http://localhost:5000/menu/edit" method="POST">
+    <input type="text" id="txtId" name="txtId" value="<%= data._id %>" hidden/>
+    <input type="text" id="txtName" name="txtName" value="<%= data.name %>"/>
+    <input type="number" id="txtOrdering" name="txtOrdering" value="<%= data.ordering %>"/>
+    <input type="checkbox" id="cbActive" name="cbActive" <% if(data.active){ %> checked <% } %>/>
+    <button type="submit" id="btnAdd">Save</button>
+</form>

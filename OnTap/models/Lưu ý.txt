@@ -1,0 +1,2 @@
+- Server trên mongo DB nó chỉ xử lý việc kết nối còn chuyện mô tả database thì phải mô tả bên code
+- Khi import các file js thì ta sẽ không thấy cái đuôi .js của file được import vì đây là node js nên nó sẽ tự hiểu 

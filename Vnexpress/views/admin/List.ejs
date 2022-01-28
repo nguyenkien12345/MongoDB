@@ -1,0 +1,32 @@
+<table width="500px" border="1px solid black">
+    <th>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Order</td>
+        <td>Active</td>
+        <td><a href="./add">Add New</a></td>
+    </th>
+
+    <% data.forEach((category) => { %>
+    <tr>
+        <td><%= category._id %></td>
+        <td><%= category.name %></td>
+        <td><%= category.ordering %></td>
+        <td>
+            <% if(category.active){ %> 
+                Hiển thị
+            <% }else{ %>
+                Ẩn
+            <% } %>
+        </td>
+        <td>
+            <a href="./edit/<%= category._id %>">Edit</a>
+            <a href="./delete/<%= category._id %>">Delete</a>
+        </td>
+    </tr>
+    <% }); %>
+</table>
+
+<!-- 
+    - Bên server (index.js) sẽ trả dữ liệu data về cho file List.ejs nên ở đây ta sẽ nhận được biến data.
+ -->

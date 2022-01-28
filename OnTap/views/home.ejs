@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Ta đã khai báo folder tĩnh nên ở đây nó sẽ tự hiểu là vào folder public lấy ra file css tương ứng -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="home">
+            <% data.forEach((cap1) => { %>
+            <div class="cap1"><%= cap1.name %></div>
+            <div>
+                <% cap1.childs.forEach((cap2) => { %>  
+                <div class="cap2">
+                    <a href="#"><%= cap2.name %></a>
+                </div>
+                <%  }); %>
+            </div>
+            <% }); %>
+        </div>
+    
+        <div id="cap1">
+            <!-- ./ chính là localhost:5000 -->
+            <form action="./themCap1" method="POST">
+                <input type="text" placeholder="Thêm cấp 1: " name="nameCap1"/>
+                <input type="submit" value="Thêm cấp 1"/>
+            </form>
+        </div>
+    
+        <div id="cap2">
+            <!-- ./ chính là localhost:5000 -->
+            <form action="./themCap2" method="POST">
+                <select name="selectCap1">
+                    <% data.forEach((cap1) => { %>
+                    <option value="<%= cap1._id %>"><%= cap1.name %></option>
+                    <% }); %>
+                </select>
+                <input type="text" placeholder="Thêm cấp 2: " name="nameCap2"/>
+                <input type="submit" value="Thêm cấp 2"/>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- 
+    - Bên server (index.js) sẽ trả dữ liệu data về cho file home.ejs nên ở đây ta sẽ nhận được biến data.
+-->
