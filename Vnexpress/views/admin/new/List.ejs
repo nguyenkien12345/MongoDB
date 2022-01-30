@@ -1,0 +1,36 @@
+<table width="500px" border="1px solid black">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Ordering</th>
+            <th>Active</th>
+            <th><a href="./add">Add New</a></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <% data.forEach((item) => {  %>
+        <tr>
+            <td><%= item.title %></td>
+            <td><%= item.content %></td>
+            <td><%= item.image %></td>
+            <td><%= item.description %></td>
+            <td><%= item.ordering %></td>
+            <td>
+                <% if(item.active){ %>
+                    Hiển thị
+                <% }else{ %>
+                    Ẩn
+                <% } %>
+            </td>
+            <td>
+                <a href="./edit/<%= item._id %>">Edit</a>
+                <a href="./delete/<%= item._id %>">Delete</a>
+            </td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+<h1>Edit News</h1>
+<form action="http://localhost:5000/new/edit" enctype="multipart/form-data" method="POST">
+    <input type="text" name="txtId" id="txtId" value="<%= data._id %>"  style="display: block;" hidden />
+    <input type="text" id="txtTitle" name="txtTitle" value="<%= data.title %>" style="display: block;"/>
+    <textarea name="txtContent" id="txtContent" cols="30" rows="10" value="<%= data.content %>" style="display: block;"></textarea>
+    <textarea name="txtDescription" id="txtDescription" cols="30" rows="10" value="<%= data.description %>" style="display: block;"></textarea>
+    <input type="text" id="txtOrder" name="txtOrder" value="<%= data.ordering %>" style="display: block;"/>
+    <input type="file" name="fileImage" id="fileImage" style="display: block;"/>
+    <input type="checkbox" name="cbNews" id="cbNews" <% if(data.ordering){ %> checked <% } %> style="display: block;"/>
+    <button type="submit" id="btnSave">Save</button>
+</form>
+
+<!-- 
+    - Luôn luôn sử dụng enctype="multipart/form-data" khi biểu mẫu của bạn có <input type="file"> => là một loại mã hóa cho phép các tệp được gửi qua POST
+    - Nếu bạn muốn cho phép người dùng tải lên một tập tin thông qua một hình thức, bạn phải sử dụng này enctype .
+ -->
