@@ -166,7 +166,7 @@ app.listen(PORT, () => {
 // Lý thuyết 
 // - Node là 1 server riêng, Mongoose là 1 server riêng. Khi ta start server Node, thì server Node nó sẽ connect qua Server mongoose
 // - Lấy chuỗi kết nối trong Connect your application (thay cái username vs password vs tên database ta muốn đặt vào)
-// - 1 Cluster tương ứng như 1 server có thể có nhiều database
+// - 1 Cluster tương ứng như 1 server có thể có nhiều database. 1 cluster chỉ nên dùng cho 1 khách hàng.
 // - Khi lên server tất cả các tên bảng (Collection) sẽ được lưu thành chữ thường (Nếu bạn đặt tên bảng có chữ hoa thì tự động khi lưu lên server MongoDB sẽ ép về chữ thường hết). Nếu bạn đặt tên bảng mà kết thúc bằng kí tự chuỗi (chữ cái) ở cuối thì khi lưu lên server nó sẽ tự thêm chữ s 
 // Vd Ta đặt tên bảng là Product thì khi lên Server nó sẽ lưu là products (Ép về lowercase và thêm chữ s vào cuối). Nhưng nếu ta kết thúc cái tên bảng bằng số thì nó sẽ không thêm s vào cuối tên bảng (Collection) mà giữ nguyên. Vd Ta đặt tên bảng là Cap1 thì khi lên Server nó sẽ lưu là cap1 (Không thêm s và ép kiểu về lowercase)
 // aggregate nhận về 2 tham số: Tham số thứ nhất là array, tham số thứ 2 là callback để bắt lỗi và cái giá trị mongoose nó trả về
