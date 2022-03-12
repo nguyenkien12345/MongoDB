@@ -9,4 +9,4 @@ const newSchema = mongoose.Schema({
     active: Boolean
 });
 
-module.exports = mongoose.model('New',newSchema);
+module.exports = mongoose.model('New', newSchema);
